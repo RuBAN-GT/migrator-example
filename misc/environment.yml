@@ -1,0 +1,5 @@
+DB__HOST: localhost
+DB__PORT: 3306
+DB__USERNAME: root
+DB__PASSWORD: root
+DB__NAME: example

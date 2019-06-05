@@ -1,0 +1,22 @@
+{
+  "name": "custom-plugin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --skipLibCheck",
+    "prepare": "yarn build",
+    "postinstall": "yarn build"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.437.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/node": "^11.13.4",
+    "@types/serverless": "^1.18.2",
+    "typescript": "^3.4.3"
+  }
+}

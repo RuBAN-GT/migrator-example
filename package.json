@@ -1,0 +1,41 @@
+{
+  "name": "lambda-migrator-example",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "migrator:debug": "NODE_ENV=development SLS_DEBUG=* node ./node_modules/.bin/serverless invoke local -f migrator",
+    "migrator:db-migration": "yarn migrator:debug --path ./misc/events/dbMigrate.json",
+    "sls:cli": "NODE_ENV=production sls",
+    "sls:deploy": "yarn sls:cli deploy",
+    "sls:remove": "yarn sls:cli remove"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "mysql": "^2.16.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.9"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.15",
+    "@types/lodash": "^4.14.118",
+    "@types/node": "^10.12.9",
+    "@types/webpack-env": "^1.13.9",
+    "custom-plugin": "file:./misc/plugins/custom-plugin",
+    "dotenv": "^8.0.0",
+    "prettier": "^1.15.2",
+    "serverless": "^1.38.0",
+    "serverless-offline": "^4.6.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.0",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.7.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.16.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

@@ -1,0 +1,40 @@
+service: migrator-example
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  migrator:
+    handler: src/handler.default
+    timeout: 10
+    environment: ${file(misc/environment.yml)}
+
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules:
+      forceInclude:
+        - mysql
+    packager: yarn
+    packagerOptions:
+      ignoreScripts: false
+
+# CloudFormation example, it's not working in real world
+resources:
+  Resources:
+    DbCluster:
+      Type: AWS::RDS::DBCluster
+      Properties:
+        Engine: aurora
+        DatabaseName: example
+        MasterUsername: root
+        MasterUserPassword: root
+    DbInstance:
+      Type: AWS::RDS::DBInstance
+      DependsOn: DbCluster
+      Properties:
+        Engine: aurora
+        DBInstanceClass: db.t2.small
+        DBClusterIdentifier: { Ref: DbCluster }
+        DBParameterGroupName: default.aurora5.6
