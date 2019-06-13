@@ -19,12 +19,13 @@ export default async function(event: MigratorEvent): Promise<any> {
     forEach(envConfig, (value, key) => (process.env[key] = value))
   }
 
+  const migrator = new Migrator()
   try {
-    await Migrator.boot()
-    return await Migrator.call(event)
+    await migrator.boot()
+    return await migrator.call(event)
   } catch (e) {
     throw e
   } finally {
-    await Migrator.shutdown()
+    await migrator.shutdown()
   }
 }

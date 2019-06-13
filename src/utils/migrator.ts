@@ -1,25 +1,29 @@
 import { actionResolver, MigratorEvent } from '@utils'
 
 export class Migrator {
-  public static booted: boolean = false
+  private booted: boolean = false
 
-  public static async boot(): Promise<void> {
-    Migrator.finalizeBooting()
+  public isBooted(): boolean {
+    return this.booted
   }
 
-  public static async call(event: MigratorEvent): Promise<any> {
+  public async boot(): Promise<void> {
+    this.finalizeBooting()
+  }
+
+  public async call(event: MigratorEvent): Promise<any> {
     return actionResolver(event)
   }
 
-  public static async shutdown(): Promise<void> {
-    Migrator.finalizeShutdown()
+  public async shutdown(): Promise<void> {
+    this.finalizeShutdown()
   }
 
-  private static finalizeBooting(): void {
-    Migrator.booted = true
+  protected finalizeBooting(): void {
+    this.booted = true
   }
 
-  private static finalizeShutdown(): void {
-    Migrator.booted = false
+  protected finalizeShutdown(): void {
+    this.booted = false
   }
 }
